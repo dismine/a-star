@@ -7,5 +7,6 @@
 
 #include <stdio.h>
 #include <GL\glut.h>
+#include <iostream>
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы
