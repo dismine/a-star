@@ -32,7 +32,7 @@ void DisplayCB(void)
 	}
 	glEnd();
 
-	glFlush(); /* Complete any pending operations */
+	glutSwapBuffers(); /* Complete any pending operations */
 }
 
 void KeyCB(unsigned char key, int x, int y)	/* called on key press */
@@ -45,7 +45,7 @@ void KeyCB(unsigned char key, int x, int y)	/* called on key press */
 
 void InitGUI()
 {
-	glutInitDisplayMode(GLUT_RGB);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT); /* width=400pixels height=500pixels */
 	glutCreateWindow("Test");	                     /* create window */
 	glMatrixMode(GL_PROJECTION); 
