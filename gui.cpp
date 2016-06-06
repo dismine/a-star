@@ -43,15 +43,23 @@ void KeyCB(unsigned char key, int x, int y)	/* called on key press */
 	}
 }
 
+void ReshapeCB(int w, int h)
+{
+   glViewport(0, 0, w, h);
+   glMatrixMode(GL_PROJECTION);
+   glLoadIdentity();
+   gluOrtho2D(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT);
+   glMatrixMode(GL_MODELVIEW);
+   glLoadIdentity();
+}
+
 void InitGUI()
 {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT); /* width=400pixels height=500pixels */
 	glutCreateWindow("Test");	                     /* create window */
-	glMatrixMode(GL_PROJECTION); 
-	glLoadIdentity(); 
 	glClearColor(0.0, 0.0, 0.0, 0.0);	             /* set background to black */
-	gluOrtho2D(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT);	 /* how object is mapped to window */
+	glutReshapeFunc(ReshapeCB);                      /* set window's reshape callback */
 	glutDisplayFunc(DisplayCB);		                 /* set window's display callback */
 	glutKeyboardFunc(KeyCB);		                 /* set window's key callback */
 }
