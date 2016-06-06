@@ -35,3 +35,4 @@ void InitGUI()
 	glutDisplayFunc(DisplayCB);		              /* set window's display callback */
 	glutKeyboardFunc(KeyCB);		              /* set window's key callback */
 }
+
