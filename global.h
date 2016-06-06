@@ -1,6 +1,9 @@
 #include <vector>
 #include <utility>
 
+const int WINDOW_WIDTH = 400;
+const int WINDOW_HEIGHT = 500;
+
 using std::vector;
 using std::pair;
 

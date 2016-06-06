@@ -111,6 +111,14 @@ std::vector<std::pair<int, int>> GetCoordinates(std::ifstream &data, int nPoints
 			return points;
 		}
 
+		if (x > WINDOW_WIDTH || y > WINDOW_HEIGHT)
+		{
+			*ok = false;
+			std::cout << "X or Y coordinate out of size. Line " << processed << ".\n";
+			points.clear();
+			return points;
+		}
+
 		std::pair<int, int> p(static_cast<int>(x), static_cast<int>(y));
 		points.push_back(p);
 		++processed;

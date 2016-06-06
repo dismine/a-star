@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "gui.h"
+#include "global.h"
 
 #include <GL\glut.h>
 
@@ -26,13 +27,13 @@ void KeyCB(unsigned char key, int x, int y)	/* called on key press */
 void InitGUI()
 {
 	glutInitDisplayMode(GLUT_RGB);
-	glutInitWindowSize(400, 500);		          /* width=400pixels height=500pixels */
-	glutCreateWindow("Test");	                  /* create window */
+	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT); /* width=400pixels height=500pixels */
+	glutCreateWindow("Test");	                     /* create window */
 	glMatrixMode(GL_PROJECTION); 
 	glLoadIdentity(); 
-	glClearColor(0.0, 0.0, 0.0, 0.0);	          /* set background to black */
-	gluOrtho2D(0, 400, 0, 500);		              /* how object is mapped to window */
-	glutDisplayFunc(DisplayCB);		              /* set window's display callback */
-	glutKeyboardFunc(KeyCB);		              /* set window's key callback */
+	glClearColor(0.0, 0.0, 0.0, 0.0);	             /* set background to black */
+	gluOrtho2D(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT);	 /* how object is mapped to window */
+	glutDisplayFunc(DisplayCB);		                 /* set window's display callback */
+	glutKeyboardFunc(KeyCB);		                 /* set window's key callback */
 }
 
