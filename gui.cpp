@@ -7,13 +7,32 @@
 void DisplayCB(void)		      
 {
 	glClear(GL_COLOR_BUFFER_BIT); /* clear the display */
-	glColor3f(1.0, 1.0, 1.0);	  /* set current color to white */
-	glBegin(GL_POLYGON);		  /* draw filled triangle */
-	glVertex2i(200,125);		  /* specify each vertex of triangle */
-	glVertex2i(100,375);
-	glVertex2i(300,375);
-	glEnd();				      /* OpenGL draws the filled triangle */
-	glFlush();				      /* Complete any pending operations */
+
+	//draw connections
+	glColor3f(0.0, 1.0, 0.0); /* green connections */
+	glLineWidth(3.0f);
+	glBegin(GL_LINES);
+	for(unsigned int i = 0; i < edges.size(); ++i)
+	{
+		const int indx1 = edges[i].first;
+		const int indx2 = edges[i].second;
+		glVertex2i(coordinates[indx1].first, coordinates[indx1].second);
+		glVertex2i(coordinates[indx2].first, coordinates[indx2].second);
+	}
+	glEnd();
+
+	// draw vertices
+	glColor3f(1.0, 1.0, 1.0);	  /* white points*/
+	glPointSize(25.0f); //setting the size of the points
+	glEnable(GL_POINT_SMOOTH); // smooth rectangles
+	glBegin(GL_POINTS);
+	for(unsigned int i = 0; i < coordinates.size(); ++i)
+	{
+		glVertex2i(coordinates[i].first, coordinates[i].second);
+	}
+	glEnd();
+
+	glFlush(); /* Complete any pending operations */
 }
 
 void KeyCB(unsigned char key, int x, int y)	/* called on key press */
