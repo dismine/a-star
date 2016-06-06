@@ -37,9 +37,13 @@ void DisplayCB(void)
 
 void KeyCB(unsigned char key, int x, int y)	/* called on key press */
 {
-	if( key == 'q' ) 
+	switch (key) 
 	{
-		exit(0);
+      case 27: // ESC
+         exit(0);
+         break;
+	  default:
+		  break;
 	}
 }
 
