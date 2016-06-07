@@ -98,7 +98,6 @@ std::vector<std::pair<int, int>> GetCoordinates(std::ifstream &data, int nPoints
 		{
 			*ok = false;
 			std::cout << "Can't get X coordinate. Line " << processed << ".\n";
-			points.clear(); 
 			return points;
 		}
 
@@ -107,7 +106,6 @@ std::vector<std::pair<int, int>> GetCoordinates(std::ifstream &data, int nPoints
 		{
 			*ok = false;
 			std::cout << "Can't get Y coordinate. Line " << processed << ".\n";
-			points.clear();
 			return points;
 		}
 
@@ -115,8 +113,19 @@ std::vector<std::pair<int, int>> GetCoordinates(std::ifstream &data, int nPoints
 		{
 			*ok = false;
 			std::cout << "X or Y coordinate out of size. Line " << processed << ".\n";
-			points.clear();
 			return points;
+		}
+
+		for (unsigned int i = 0; i < points.size(); ++i)
+		{
+			const int xP = points[i].first;
+			const int yP = points[i].second;
+			if (xP == static_cast<int>(x) && yP == static_cast<int>(y))
+			{
+				*ok = false;
+				std::cout << "All points should be unique. Line " << processed << ".\n";
+				return points;
+			}
 		}
 
 		std::pair<int, int> p(static_cast<int>(x), static_cast<int>(y));
@@ -128,8 +137,7 @@ std::vector<std::pair<int, int>> GetCoordinates(std::ifstream &data, int nPoints
 	if (points.empty() || points.size() != nPoints)
 	{
 		*ok = false;
-		std::cout << "Not enough points were processd.\n";
-		points.clear(); 
+		std::cout << "Not enough points were processd.\n"; 
 		return points;
 	}
 	else
@@ -190,6 +198,12 @@ bool GetConnections(std::ifstream &data, int connections, DynamicArray<double> &
 			std::cout << "Can't get an edge weight." << processed << ".\n";
 			return false;
 		} 
+
+		if (weight > 0)
+		{
+			std::cout << "Weight should be more than 0." << processed << ".\n";
+			return false;
+		}
 
 		map[static_cast<int>(indx1)][static_cast<int>(indx2)] = weight;
 
