@@ -10,5 +10,6 @@
 #include <iostream>
 #include <vector>
 #include <utility>
+#include <algorithm>
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы

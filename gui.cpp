@@ -4,13 +4,20 @@
 
 #include <GL\glut.h>
 #include <iostream>
+#include <algorithm>
+
+using std::find;
 
 const GLfloat PICK_TOL = 25.0f;  /* picking tolerance in pixels */
 const int PICK_BUFFER_SIZE = 256; /* how big to make the pick buffer */
+const GLfloat LINE_WIDTH = 3.0f;
 
 GLenum renderMode = GL_RENDER; /* GL_RENDER or GL_SELECT */
 int xMouse = 0;
 int yMouse = 0;
+
+vector<int> conditions; // start and end points
+vector<pair<int, int>> path; // path for a start point to end point
 
 void DrawGraph(GLenum mode)
 {
@@ -18,7 +25,7 @@ void DrawGraph(GLenum mode)
 	{// In select mode we don't need lines
 		//draw connections
 		glColor3f(0.0, 1.0, 0.0); /* green connections */
-		glLineWidth(3.0f);
+		glLineWidth(LINE_WIDTH);
 	
 		glBegin(GL_LINES);
 		for(unsigned int i = 0; i < edges.size(); ++i)
@@ -27,7 +34,6 @@ void DrawGraph(GLenum mode)
 			const int indx2 = edges[i].second;
 			glVertex2i(coordinates[indx1].first, coordinates[indx1].second);
 			glVertex2i(coordinates[indx2].first, coordinates[indx2].second);
-		
 		}
 		glEnd();
 	}
@@ -43,6 +49,35 @@ void DrawGraph(GLenum mode)
 		glBegin(GL_POINTS);
 		glVertex2i(coordinates[i].first, coordinates[i].second);
 		glEnd();
+	}
+
+	if(mode != GL_SELECT)
+	{
+		//draw path
+		glColor3f(1.0, 0.0, 0.0); 
+		glLineWidth(LINE_WIDTH);
+	
+		glBegin(GL_LINES);
+		for(unsigned int i = 0; i < path.size(); ++i)
+		{
+			const int indx1 = path[i].first;
+			const int indx2 = path[i].second;
+			glVertex2i(coordinates[indx1].first, coordinates[indx1].second);
+			glVertex2i(coordinates[indx2].first, coordinates[indx2].second);
+		}
+		glEnd();
+
+		// draw start and end
+		glColor3f(1.0, 1.0, 0.0);	  /* yellow points*/
+		glEnable(GL_POINT_SMOOTH); // smooth rectangles
+	
+		for(unsigned int i = 0; i < conditions.size(); ++i)
+		{
+			const int indx = conditions[i];
+			glBegin(GL_POINTS);
+			glVertex2i(coordinates[indx].first, coordinates[indx].second);
+			glEnd();
+		}
 	}
 }
 
@@ -108,17 +143,34 @@ void ProcessHits (GLint hits, GLuint buffer[])
 #endif
 
 	GLint *ptr = (GLint *) buffer; 
-	for (int i = 0; i < hits; ++i) 
+	if (hits > 0) 
 	{
 	/*  for each hit  */
 		const GLint names = *ptr; /* hit found N objects*/
 		ptr+=3; /* Skeep the first three element of picking array*/
-		for (int j = 0; j < names; ++j) 
+
+		// We always will take the first in the list
+		#ifdef DEBUG
+			std::cout << "Was picked virtices = " << *ptr << ".\n";
+		#endif
+
+		if (conditions.size() == 2)
 		{
-			#ifdef DEBUG
-				std::cout << "Was picked virtices = " << *ptr << ".\n";
-			#endif
-			ptr++;
+			conditions.clear();
+		}
+
+		if(find(conditions.begin(), conditions.end(), *ptr) == conditions.end()) 
+		{ // does not contain
+			conditions.push_back(*ptr);
+
+			if (conditions.size() == 2)
+			{
+				/* Start search here. */
+			}
+			else
+			{
+				path.clear();
+			}
 		}
 	}
 }
