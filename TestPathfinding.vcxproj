@@ -87,6 +87,7 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="global.cpp" />
     <ClCompile Include="gui.cpp" />
     <ClCompile Include="parsing.cpp" />
     <ClCompile Include="stdafx.cpp">

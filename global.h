@@ -14,6 +14,9 @@ class DynamicArray;
 extern vector<pair<int, int>> coordinates; // point coordinates
 extern vector<pair<int, int>> edges; // conncetions
 extern DynamicArray<double> map; // contain weights
+extern double onePixelWeight; // weight local heuristic for one pixel length
+
+double Length(int indx1, int indx2); // Calculate length between points
 
 // I really hate the idea to use raw pointers for two dimensional dynamic array
 // This nice template will make my life a lot easier

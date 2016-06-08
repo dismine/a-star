@@ -5,6 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <utility>
+#include <limits>
 
 using std::vector;
 using std::pair;
@@ -16,6 +17,7 @@ const char* const DELIMITER = " ";
 vector<pair<int, int>> coordinates; // point coordinates
 vector<pair<int, int>> edges; // all connections
 DynamicArray<double> map;
+double onePixelWeight;
 
 bool ParseLong(const char *str, long &val)
 {
@@ -292,6 +294,24 @@ bool Parse(int argc, char *argv[])
 	{
 		std::cout << "Can't get edges.\n";
 		return false;
+	}
+
+	// For heuristic function we somehow should estimate the remaining distance to the goal.
+	// Problem is how to understand weight value. These values do not depend on geometry positions, as i see it.
+	// I came to conlusion that we could calcualte weigh for one pixel for each edge and take the smaller value.
+	// It will not break the main rule for a heuristic function, it should not produce the value bigger than real.
+
+#undef max
+	onePixelWeight = std::numeric_limits<double>::max(); // First make value max possible.
+
+	for(unsigned int i = 0; i < edges.size(); ++i)
+	{
+		const int indx1 = edges[i].first;
+		const int indx2 = edges[i].second;
+
+		const double length = Length(indx1, indx2);
+		const double weight = map[indx1][indx2];
+		onePixelWeight = min(weight / length, onePixelWeight);
 	}
 	
 	return true;
