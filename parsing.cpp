@@ -10,16 +10,16 @@
 using std::vector;
 using std::pair;
 
-const int MAX_CHARS_PER_LINE = 512;
-const int MAX_TOKENS_PER_LINE = 3;
-const char* const DELIMITER = " ";
+static const int MAX_CHARS_PER_LINE = 512;
+static const int MAX_TOKENS_PER_LINE = 3;
+static const char* const DELIMITER = " ";
 
 vector<pair<int, int>> coordinates; // point coordinates
 vector<pair<int, int>> edges; // all connections
 DynamicArray<double> map;
 double onePixelWeight;
 
-bool ParseLong(const char *str, long &val)
+static bool ParseLong(const char *str, long &val)
 {
     char *temp;
     bool res = true;
@@ -34,7 +34,7 @@ bool ParseLong(const char *str, long &val)
     return res;
 }
 
-int GetNumberObjects(std::ifstream &data, bool *ok)
+static int GetNumberObjects(std::ifstream &data, bool *ok)
 {
 	long numberPoints = -1;
 
@@ -71,7 +71,7 @@ int GetNumberObjects(std::ifstream &data, bool *ok)
 	return 0;
 }
 
-std::vector<std::pair<int, int>> GetCoordinates(std::ifstream &data, int nPoints, bool *ok)
+static std::vector<std::pair<int, int>> GetCoordinates(std::ifstream &data, int nPoints, bool *ok)
 {
 	std::vector<std::pair<int, int>> points;
 
@@ -149,7 +149,7 @@ std::vector<std::pair<int, int>> GetCoordinates(std::ifstream &data, int nPoints
 	}
 }
 
-bool GetConnections(std::ifstream &data, int connections, DynamicArray<double> &map, vector<pair<int, int>> &edges)
+static bool GetConnections(std::ifstream &data, int connections, DynamicArray<double> &map, vector<pair<int, int>> &edges)
 {
 	int processed = 0;
 	do

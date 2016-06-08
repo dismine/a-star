@@ -75,12 +75,12 @@ double Node::Estimate(int dest) const
 }
 
 // Determine priority (in the priority queue)
-bool operator<(const Node &a, const Node &b)
+static bool operator<(const Node &a, const Node &b)
 {
   return a.GetFX() > b.GetFX();
 }
 
-vector<int> Directions(int from)
+static vector<int> Directions(int from)
 {
 	vector<int> dir;
 	for(unsigned int i = 0; i < coordinates.size(); ++i)

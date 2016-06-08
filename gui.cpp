@@ -9,18 +9,18 @@
 
 using std::find;
 
-const GLfloat PICK_TOL = 25.0f;  /* picking tolerance in pixels */
-const int PICK_BUFFER_SIZE = 256; /* how big to make the pick buffer */
-const GLfloat LINE_WIDTH = 3.0f;
+static const GLfloat PICK_TOL = 25.0f;  /* picking tolerance in pixels */
+static const int PICK_BUFFER_SIZE = 256; /* how big to make the pick buffer */
+static const GLfloat LINE_WIDTH = 3.0f;
 
-GLenum renderMode = GL_RENDER; /* GL_RENDER or GL_SELECT */
-int xMouse = 0;
-int yMouse = 0;
+static GLenum renderMode = GL_RENDER; /* GL_RENDER or GL_SELECT */
+static int xMouse = 0;
+static int yMouse = 0;
 
-vector<int> conditions; // start and end points
-vector<pair<int, int>> path; // path for a start point to end point
+static vector<int> conditions; // start and end points
+static vector<pair<int, int>> path; // path for a start point to end point
 
-void DrawGraph(GLenum mode)
+static void DrawGraph(GLenum mode)
 {
 	if(mode != GL_SELECT)
 	{// In select mode we don't need lines
@@ -82,7 +82,7 @@ void DrawGraph(GLenum mode)
 	}
 }
 
-void DisplayCB(void)		      
+static void DisplayCB(void)		      
 {
 	GLint viewport[4]; /* place to retrieve the viewport numbers */
 
@@ -114,7 +114,7 @@ void DisplayCB(void)
 	}
 }
 
-void KeyCB(unsigned char key, int x, int y)	/* called on key press */
+static void KeyCB(unsigned char key, int x, int y)	/* called on key press */
 {
 	switch (key) 
 	{
@@ -126,7 +126,7 @@ void KeyCB(unsigned char key, int x, int y)	/* called on key press */
 	}
 }
 
-void ReshapeCB(int w, int h)
+static void ReshapeCB(int w, int h)
 {
    glViewport(0, 0, w, h);
    glMatrixMode(GL_PROJECTION);
@@ -137,7 +137,7 @@ void ReshapeCB(int w, int h)
 }
 
 /*  ProcessHits process the contents of the selection array. */
-void ProcessHits (GLint hits, GLuint buffer[])
+static void ProcessHits (GLint hits, GLuint buffer[])
 {
 #ifdef DEBUG
 	std::cout << "Pick hits = " << hits << ".\n";
@@ -167,7 +167,7 @@ void ProcessHits (GLint hits, GLuint buffer[])
 	}
 }
 
-void MouseCB(int button, int state, int x, int y)
+static void MouseCB(int button, int state, int x, int y)
 {
 	xMouse = x;
 	yMouse = y;
