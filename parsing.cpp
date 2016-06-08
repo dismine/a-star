@@ -232,7 +232,27 @@ bool Parse(int argc, char *argv[])
 {
 	if (argc < 2) 
 	{ // Check the value of argc. If not enough parameters have been passed, inform user and exit.
-        std::cout << "Please, provide file with graph description.\n"; // Inform the user of how to use the program
+        std::cout << "Please, provide file with graph description.\n\n"; // Inform the user of how to use the program
+		std::cout << "The file format for graph description is:\n";
+		std::cout << "<number_of_vertices>\n";
+		std::cout << "<x> <y>\n";
+		std::cout << " ....  ....\n";
+		std::cout << "<x> <y>\n";
+		std::cout << "<number_of_connections>\n";
+		std::cout << "<0_point_idx> <1_point_idx> <weight>\n";
+		std::cout << " ....  ....  ....\n";
+		std::cout << "<2_point_idx> <1_point_idx> <weight>\n\n";
+		std::cout << "Example:\n";
+		std::cout << "4\n";
+		std::cout << "1 1\n";
+		std::cout << "100 100\n";
+		std::cout << "100 200\n";
+		std::cout << "300 300\n";
+		std::cout << "4\n";
+		std::cout << "0 1 1\n";
+		std::cout << "0 2 0.5\n";
+		std::cout << "1 3 1\n";
+		std::cout << "2 3 0.5\n";
         return false;
 	}
 
