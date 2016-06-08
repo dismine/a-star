@@ -101,11 +101,13 @@ vector<pair<int, int>> PathFind(int start, int finish)
 	set<int> openNodes; // set of open (not-yet-tried) nodes
 	vector<int> from(coordinates.size(),-1); //contain shortes path from vertex to vertex
 
+	{//Compiler can free this memory
 	// create the start node and push into set of open nodes
     Node startNode = Node(start);
 	startNode.SetFX(finish);
 	pq[pqi].push(startNode);
 	openNodes.insert(startNode.Index()); // add it to the open nodes set
+	}
 
 	// A* search
     while(!pq[pqi].empty())
