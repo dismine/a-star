@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "gui.h"
 #include "global.h"
+#include "astar.h"
 
 #include <GL\glut.h>
 #include <iostream>
@@ -145,13 +146,11 @@ void ProcessHits (GLint hits, GLuint buffer[])
 	GLint *ptr = (GLint *) buffer; 
 	if (hits > 0) 
 	{
-	/*  for each hit  */
-		const GLint names = *ptr; /* hit found N objects*/
 		ptr+=3; /* Skeep the first three element of picking array*/
 
 		// We always will take the first in the list
 		#ifdef DEBUG
-			std::cout << "Was picked virtices = " << *ptr << ".\n";
+			std::cout << "Was picked vertex = " << *ptr << ".\n";
 		#endif
 
 		if (conditions.size() == 2)
@@ -163,14 +162,7 @@ void ProcessHits (GLint hits, GLuint buffer[])
 		{ // does not contain
 			conditions.push_back(*ptr);
 
-			if (conditions.size() == 2)
-			{
-				/* Start search here. */
-			}
-			else
-			{
-				path.clear();
-			}
+			conditions.size() == 2 ? path = PathFind(conditions[0], conditions[1]) : path.clear();
 		}
 	}
 }

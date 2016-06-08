@@ -11,6 +11,8 @@
 #include <vector>
 #include <utility>
 #include <algorithm>
+#include <queue>
+#include <set>
 #include <limits>
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы

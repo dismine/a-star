@@ -81,12 +81,14 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="astar.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="gui.h" />
     <ClInclude Include="parsing.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="astar.cpp" />
     <ClCompile Include="global.cpp" />
     <ClCompile Include="gui.cpp" />
     <ClCompile Include="parsing.cpp" />

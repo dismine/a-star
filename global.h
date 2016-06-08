@@ -12,7 +12,7 @@ class DynamicArray;
 
 // The program is very small so i don't see big dangerous in using global variables.
 extern vector<pair<int, int>> coordinates; // point coordinates
-extern vector<pair<int, int>> edges; // conncetions
+extern vector<pair<int, int>> edges; // connections
 extern DynamicArray<double> map; // contain weights
 extern double onePixelWeight; // weight local heuristic for one pixel length
 

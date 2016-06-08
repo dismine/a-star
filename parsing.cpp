@@ -208,6 +208,7 @@ bool GetConnections(std::ifstream &data, int connections, DynamicArray<double> &
 		}
 
 		map[static_cast<int>(indx1)][static_cast<int>(indx2)] = weight;
+		map[static_cast<int>(indx2)][static_cast<int>(indx1)] = weight; // Revers order also important
 
 		pair<int, int> edge(static_cast<int>(indx1), static_cast<int>(indx2));
 		edges.push_back(edge);
