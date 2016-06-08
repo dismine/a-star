@@ -171,7 +171,7 @@ bool GetConnections(std::ifstream &data, int connections, DynamicArray<double> &
 			token[1] = strtok_s(nullptr, DELIMITER, &nextToken);
 			if (!token[1]) 
 			{
-				std::cout << "Can't parse an index the second endge." << processed << ".\n";
+				std::cout << "Can't parse an index the second endge. Line " << processed << ".\n";
 				break; // can't get the second edge
 			}
 
@@ -181,14 +181,14 @@ bool GetConnections(std::ifstream &data, int connections, DynamicArray<double> &
 		long indx1 = 0;
 		if (!ParseLong(token[0], indx1))
 		{
-			std::cout << "Can't get an index the first endge." << processed << ".\n";
+			std::cout << "Can't get an index the first endge. Line " << processed << ".\n";
 			return false;
 		}
 
 		long indx2 = 0;
 		if (!ParseLong(token[1], indx2))
 		{
-			std::cout << "Can't get an index the second endge." << processed << ".\n";
+			std::cout << "Can't get an index the second endge. Line " << processed << ".\n";
 			return false;
 		}
 
@@ -197,13 +197,13 @@ bool GetConnections(std::ifstream &data, int connections, DynamicArray<double> &
 		weight = strtod(token[2], &end);
 		if(end == token[2]) 
 		{
-			std::cout << "Can't get an edge weight." << processed << ".\n";
+			std::cout << "Can't get an edge weight. Line " << processed << ".\n";
 			return false;
 		} 
 
 		if (!weight > 0)
 		{
-			std::cout << "Weight should be more than 0." << processed << ".\n";
+			std::cout << "Weight should be more than 0. Line " << processed << ".\n";
 			return false;
 		}
 
