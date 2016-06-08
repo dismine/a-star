@@ -208,7 +208,7 @@ void InitGUI()
 {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT); /* width=400pixels height=500pixels */
-	glutCreateWindow("Test");	                     /* create window */
+	glutCreateWindow("A-star algorithm");	         /* create window */
 	glClearColor(0.0, 0.0, 0.0, 0.0);	             /* set background to black */
 	glutReshapeFunc(ReshapeCB);                      /* set window's reshape callback */
 	glutDisplayFunc(DisplayCB);		                 /* set window's display callback */
