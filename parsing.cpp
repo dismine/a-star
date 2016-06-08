@@ -201,7 +201,7 @@ bool GetConnections(std::ifstream &data, int connections, DynamicArray<double> &
 			return false;
 		} 
 
-		if (weight > 0)
+		if (!weight > 0)
 		{
 			std::cout << "Weight should be more than 0." << processed << ".\n";
 			return false;
