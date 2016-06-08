@@ -82,6 +82,16 @@ static void DrawGraph(GLenum mode)
 	}
 }
 
+static void PrintText(int x, int y, const std::string &string)
+{
+	//(x, y) is from the bottom left of the window
+    glRasterPos2i(x, y);
+    for (unsigned int i = 0; i < string.size(); ++i)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_9_BY_15, string[i]);
+    }
+}
+
 static void DisplayCB(void)		      
 {
 	GLint viewport[4]; /* place to retrieve the viewport numbers */
@@ -105,6 +115,27 @@ static void DisplayCB(void)
 	gluOrtho2D(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
+	if(renderMode != GL_SELECT)
+	{
+		const int x = 10;
+		const int y = 10;
+		switch(conditions.size())
+		{
+		case 0:
+			PrintText(x, y, std::string("Select a vertex"));
+			break;
+		case 1:
+			PrintText(x, y, std::string("Select the finish vertex"));
+			break;
+		case 2:
+			PrintText(x, y, std::string("Select the start vertex to try again"));
+			break;
+		default:
+			break;
+		}
+	}
+
 	DrawGraph(renderMode);
 
 	/* swap the double-buffered framebuffers */
