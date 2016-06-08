@@ -99,7 +99,7 @@ static std::vector<std::pair<int, int>> GetCoordinates(std::ifstream &data, int 
 		if (!ParseLong(token[0], x))
 		{
 			*ok = false;
-			std::cout << "Can't get X coordinate. Line " << processed << ".\n";
+			std::cout << "Can't get X coordinate. Line " << processed + 1 << ".\n";
 			return points;
 		}
 
@@ -107,14 +107,15 @@ static std::vector<std::pair<int, int>> GetCoordinates(std::ifstream &data, int 
 		if (!ParseLong(token[1], y))
 		{
 			*ok = false;
-			std::cout << "Can't get Y coordinate. Line " << processed << ".\n";
+			std::cout << "Can't get Y coordinate. Line " << processed + 1 << ".\n";
 			return points;
 		}
 
 		if (x > WINDOW_WIDTH || y > WINDOW_HEIGHT)
 		{
 			*ok = false;
-			std::cout << "X or Y coordinate out of size. Line " << processed << ".\n";
+			std::cout << "X or Y coordinate out of size. Line " << processed + 1 << ".\n";
+			std::cout << "Max X = " << WINDOW_WIDTH << " Y = " << WINDOW_HEIGHT << ".\n";
 			return points;
 		}
 
@@ -125,7 +126,7 @@ static std::vector<std::pair<int, int>> GetCoordinates(std::ifstream &data, int 
 			if (xP == static_cast<int>(x) && yP == static_cast<int>(y))
 			{
 				*ok = false;
-				std::cout << "All points should be unique. Line " << processed << ".\n";
+				std::cout << "All points should be unique. Line " << processed + 1 << ".\n";
 				return points;
 			}
 		}
