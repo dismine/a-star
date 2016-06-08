@@ -114,7 +114,7 @@ vector<pair<int, int>> PathFind(int start, int finish)
     {
 		// get the current node with the highest fx
         // from the list of open nodes
-        Node current = Node(pq[pqi].top().Index(), pq[pqi].top().GetGX(), pq[pqi].top().GetFX());
+        const Node current = Node(pq[pqi].top().Index(), pq[pqi].top().GetGX(), pq[pqi].top().GetFX());
 
 		int index = current.Index();
 
