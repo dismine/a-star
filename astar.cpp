@@ -99,7 +99,8 @@ vector<pair<int, int>> PathFind(int start, int finish)
 	int pqi = 0; // pq index
 	set<int> closedNodes; // set of closed (tried-out) nodes
 	set<int> openNodes; // set of open (not-yet-tried) nodes
-	vector<int> from(coordinates.size(),-1); //contain shortes path from vertex to vertex
+	vector<int> from(coordinates.size(), -1); //contain shortes path from vertex to vertex
+	vector<double> gx(coordinates.size(), 0); //contain smallest gx weight to vertex
 
 	{//Compiler can free this memory
 	// create the start node and push into set of open nodes
@@ -154,13 +155,16 @@ vector<pair<int, int>> PathFind(int start, int finish)
 				search = openNodes.find(dir[i]);
 				if (search == openNodes.end())
 				{// Not found
+					gx[dir[i]] = neighbour.GetGX();
 					openNodes.insert(dir[i]);
                     pq[pqi].push(neighbour);
                     // mark its parent node direction
 					from[dir[i]] = index; 
 				}
-				else if (current.GetGX() > neighbour.GetGX())
+				else if (gx[dir[i]] > neighbour.GetGX())
                 {
+					// update the priority info
+					gx[dir[i]] = neighbour.GetGX();
                     // update the parent direction info
                     from[dir[i]] = index;
 
